@@ -13,7 +13,7 @@ export default defineConfig({
   vite: {
     plugins: [tailwindcss()],
   },
-  site: "https://opengl-ar.vercel.app",
+  site: "https://modern-opengl-ar.vercel.app",
   integrations: [mdx()],
   markdown: {
     remarkPlugins: [remarkMath],
