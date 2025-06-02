@@ -14,20 +14,20 @@ export const WORKSHOP_CONFIG = {
 
   // ——————————————————— Ponente / staff ———————————————————
   speaker: {
-    name: "Railly Hugo Quispe",
-    role: "Web-UI Dev @ Disney Streaming | Jefe de Práctica FISI-UNMSM",
+    name: "Railly Hugo",
+    role: "Design Engineer | Maestrando en AI | Jefe de Práctica FISI-UNMSM",
     avatar: "/hugo-profile.webp",
     social: {
       github: "https://github.com/railly",
       linkedin: "https://www.linkedin.com/in/railly-hugo/",
-      twitter: "https://twitter.com/raillycodes"
+      twitter: "https://twitter.com/raillyhugo"
     },
     contact: "railly.hugo@unmsm.edu.pe"
   },
 
   // ——————————————————— Repositorio base ———————————————————
   repository: {
-    url: "https://github.com/railly/modern-opengl-ar-workshop",
+    url: "https://github.com/unmsm-io/modern-opengl-ar",
     defaultBranch: "main",
     license: "MIT"
   },
