@@ -17,12 +17,14 @@ const { steps, children } = Astro.props;
     steps ? (
       steps.map((step, index) => (
         <div class="flex gap-4">
-          <div class="flex h-8 w-8 items-center justify-center rounded-full bg-zinc-100 text-sm font-medium dark:bg-zinc-800">
+          <div class="flex h-8 w-8 items-center justify-center rounded-full bg-neutral-100 text-sm font-medium dark:bg-neutral-800">
             {index + 1}
           </div>
           <div>
             <h3 class="font-medium">{step.title}</h3>
-            <p class="text-zinc-600 dark:text-zinc-400">{step.description}</p>
+            <p class="text-neutral-600 dark:text-neutral-400">
+              {step.description}
+            </p>
           </div>
         </div>
       ))

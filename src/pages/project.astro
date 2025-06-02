@@ -120,7 +120,7 @@ const guidelines = [
               <div class="mb-6 last:mb-0">
                 <h2 class="text-lg font-medium mt-0 mb-3">{section.title}</h2>
                 {section.content && (
-                  <p class="text-zinc-600 dark:text-zinc-300 text-sm">
+                  <p class="text-neutral-600 dark:text-neutral-300 text-sm">
                     {section.content}
                   </p>
                 )}
@@ -128,7 +128,7 @@ const guidelines = [
                   <ul class="mt-3 space-y-2">
                     {section.items.map((item) => (
                       <li class="flex gap-2 text-sm">
-                        <ChevronRight class="w-4 h-4 text-zinc-400 shrink-0" />
+                        <ChevronRight class="w-4 h-4 text-neutral-400 shrink-0" />
                         <span>{item}</span>
                       </li>
                     ))}
@@ -145,17 +145,17 @@ const guidelines = [
             <div class="space-y-4">
               {
                 projectMilestones.map((milestone) => (
-                  <div class="border-l-2 border-zinc-200 dark:border-zinc-700 pl-4">
+                  <div class="border-l-2 border-neutral-200 dark:border-neutral-700 pl-4">
                     <h3 class="text-base font-medium mt-0 mb-1">
                       {milestone.title}
                     </h3>
-                    <time class="text-sm text-zinc-500">
+                    <time class="text-sm text-neutral-500">
                       {new Date(milestone.date).toLocaleDateString("es-PE", {
                         month: "long",
                         day: "numeric",
                       })}
                     </time>
-                    <p class="text-sm text-zinc-600 dark:text-zinc-300 mt-1">
+                    <p class="text-sm text-neutral-600 dark:text-neutral-300 mt-1">
                       {milestone.description}
                     </p>
                   </div>
@@ -172,15 +172,15 @@ const guidelines = [
         <div class="grid gap-4 sm:grid-cols-2">
           {
             projectTracks.map((track) => (
-              <div class="bg-white dark:bg-zinc-800/50 border border-zinc-200 dark:border-zinc-700 rounded p-4">
+              <div class="bg-white dark:bg-neutral-800/50 border border-neutral-200 dark:border-neutral-700 rounded p-4">
                 <h3 class="text-base font-medium mt-0 mb-2">{track.title}</h3>
-                <p class="text-sm text-zinc-600 dark:text-zinc-300 mb-3">
+                <p class="text-sm text-neutral-600 dark:text-neutral-300 mb-3">
                   {track.description}
                 </p>
                 <ul class="space-y-1 mb-0">
                   {track.examples.map((example) => (
                     <li class="text-sm flex items-center gap-2">
-                      <ChevronRight class="w-3.5 h-3.5 text-zinc-400" />
+                      <ChevronRight class="w-3.5 h-3.5 text-neutral-400" />
                       {example}
                     </li>
                   ))}

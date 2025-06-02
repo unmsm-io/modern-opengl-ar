@@ -24,19 +24,19 @@ const announcements = [
     <h2 class="text-xl font-semibold mt-0 mb-0 flex items-center gap-2">
       Anuncios
     </h2>
-    <div class="divide-y divide-zinc-200 dark:divide-zinc-700">
+    <div class="divide-y divide-neutral-200 dark:divide-neutral-700">
       {
         announcements.map((announcement) => (
           <div class="py-4">
             <h3 class="text-base mt-0 font-medium mb-1">
               {announcement.title}
             </h3>
-            <p class="text-sm text-zinc-600 dark:text-zinc-300">
+            <p class="text-sm text-neutral-600 dark:text-neutral-300">
               {announcement.content}
             </p>
             <time
               datetime={announcement.date}
-              class="block mt-2 text-sm text-zinc-500"
+              class="block mt-2 text-sm text-neutral-500"
             >
               {new Date(announcement.date).toLocaleDateString("es-PE", {
                 year: "numeric",

@@ -5,10 +5,10 @@ import { WORKSHOP_CONFIG } from "../../config/workshop";
 <section class="prose dark:prose-invert mb-0 max-w-none">
   <div class="rounded-lg p-6">
     <h2 class="text-xl font-semibold mb-4 mt-0">Descripción del Taller</h2>
-    <p class="text-zinc-600 dark:text-zinc-300 mb-4">
+    <p class="text-neutral-600 dark:text-neutral-300 mb-4">
       {WORKSHOP_CONFIG.subtitle}
     </p>
-    <p class="text-zinc-600 dark:text-zinc-300">
+    <p class="text-neutral-600 dark:text-neutral-300">
       Este taller práctico te guiará paso a paso en la creación de una
       aplicación de realidad aumentada usando OpenGL moderno, desde el setup
       inicial hasta un sistema solar completo con iluminación Phong.
@@ -28,17 +28,17 @@ import { WORKSHOP_CONFIG } from "../../config/workshop";
       <div class="grid sm:grid-cols-2 gap-4">
         {
           WORKSHOP_CONFIG.steps.map((step) => (
-            <div class="bg-white dark:bg-zinc-800/50 border border-zinc-200 dark:border-zinc-700 rounded p-4">
+            <div class="bg-white dark:bg-neutral-800/50 border border-neutral-200 dark:border-neutral-700 rounded p-4">
               <div class="flex items-start justify-between mb-2">
                 <h4 class="font-semibold text-sm mt-0 mb-0">{step.title}</h4>
-                <span class="text-xs text-zinc-500 dark:text-zinc-400 bg-zinc-100 dark:bg-zinc-700 px-2 py-1 rounded">
+                <span class="text-xs text-neutral-500 dark:text-neutral-400 bg-neutral-100 dark:bg-neutral-700 px-2 py-1 rounded">
                   {step.durationMin}m
                 </span>
               </div>
-              <p class="text-sm text-zinc-600 dark:text-zinc-300 mb-2">
+              <p class="text-sm text-neutral-600 dark:text-neutral-300 mb-2">
                 {step.summary}
               </p>
-              <code class="text-xs bg-zinc-100 dark:bg-zinc-700 px-2 py-1 rounded">
+              <code class="text-xs bg-neutral-100 dark:bg-neutral-700 px-2 py-1 rounded">
                 {step.tag}
               </code>
             </div>
@@ -50,7 +50,7 @@ import { WORKSHOP_CONFIG } from "../../config/workshop";
     <div class="mt-6">
       <h3 class="text-lg font-semibold mb-3">Información del Ponente</h3>
       <div
-        class="bg-white dark:bg-zinc-800/50 border border-zinc-200 dark:border-zinc-700 rounded p-4"
+        class="bg-white dark:bg-neutral-800/50 border border-neutral-200 dark:border-neutral-700 rounded p-4"
       >
         <div class="flex items-start gap-4">
           <img
@@ -62,7 +62,7 @@ import { WORKSHOP_CONFIG } from "../../config/workshop";
             <h4 class="font-semibold text-sm mt-0 mb-1">
               {WORKSHOP_CONFIG.speaker.name}
             </h4>
-            <p class="text-sm text-zinc-600 dark:text-zinc-300 mb-0">
+            <p class="text-sm text-neutral-600 dark:text-neutral-300 mb-0">
               {WORKSHOP_CONFIG.speaker.role}
             </p>
           </div>

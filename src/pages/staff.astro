@@ -14,7 +14,7 @@ const { speaker } = WORKSHOP_CONFIG;
       <!-- Speaker Information -->
       <section>
         <div
-          class="bg-white dark:bg-zinc-800/50 border border-zinc-200 dark:border-zinc-700 rounded-lg p-6"
+          class="bg-white dark:bg-neutral-800/50 border border-neutral-200 dark:border-neutral-700 rounded-lg p-6"
         >
           <div class="flex flex-col md:flex-row gap-6">
             <img
@@ -27,7 +27,7 @@ const { speaker } = WORKSHOP_CONFIG;
               <h2 class="text-xl font-semibold mt-0 mb-2">
                 {speaker.name}
               </h2>
-              <p class="text-zinc-600 dark:text-zinc-300 mb-4">
+              <p class="text-neutral-600 dark:text-neutral-300 mb-4">
                 {speaker.role}
               </p>
 
@@ -47,7 +47,7 @@ const { speaker } = WORKSHOP_CONFIG;
                         href={speaker.social.github}
                         target="_blank"
                         rel="noopener noreferrer"
-                        class="text-sm text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white inline-flex items-center gap-2"
+                        class="text-sm text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-white inline-flex items-center gap-2"
                       >
                         <Github class="w-4 h-4" />
                         GitHub
@@ -62,7 +62,7 @@ const { speaker } = WORKSHOP_CONFIG;
                         href={speaker.social.linkedin}
                         target="_blank"
                         rel="noopener noreferrer"
-                        class="text-sm text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white inline-flex items-center gap-2"
+                        class="text-sm text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-white inline-flex items-center gap-2"
                       >
                         <Linkedin class="w-4 h-4" />
                         LinkedIn
@@ -77,7 +77,7 @@ const { speaker } = WORKSHOP_CONFIG;
                         href={speaker.social.twitter}
                         target="_blank"
                         rel="noopener noreferrer"
-                        class="text-sm text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white inline-flex items-center gap-2"
+                        class="text-sm text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-white inline-flex items-center gap-2"
                       >
                         <Twitter class="w-4 h-4" />
                         Twitter
@@ -96,18 +96,18 @@ const { speaker } = WORKSHOP_CONFIG;
       <section>
         <h2 class="text-lg font-medium mt-0 mb-4">Información del Taller</h2>
         <div
-          class="bg-white dark:bg-zinc-800/50 border border-zinc-200 dark:border-zinc-700 rounded-lg p-4"
+          class="bg-white dark:bg-neutral-800/50 border border-neutral-200 dark:border-neutral-700 rounded-lg p-4"
         >
           <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
               <h3 class="font-medium mb-2">Título</h3>
-              <p class="text-zinc-600 dark:text-zinc-300">
+              <p class="text-neutral-600 dark:text-neutral-300">
                 {WORKSHOP_CONFIG.title}
               </p>
             </div>
             <div>
               <h3 class="font-medium mb-2">Fecha</h3>
-              <p class="text-zinc-600 dark:text-zinc-300">
+              <p class="text-neutral-600 dark:text-neutral-300">
                 {
                   new Date(WORKSHOP_CONFIG.date).toLocaleDateString("es-PE", {
                     weekday: "long",
@@ -120,13 +120,13 @@ const { speaker } = WORKSHOP_CONFIG;
             </div>
             <div>
               <h3 class="font-medium mb-2">Duración</h3>
-              <p class="text-zinc-600 dark:text-zinc-300">
+              <p class="text-neutral-600 dark:text-neutral-300">
                 {WORKSHOP_CONFIG.durationHours} horas
               </p>
             </div>
             <div>
               <h3 class="font-medium mb-2">Lugar</h3>
-              <p class="text-zinc-600 dark:text-zinc-300">
+              <p class="text-neutral-600 dark:text-neutral-300">
                 {WORKSHOP_CONFIG.place}
               </p>
             </div>

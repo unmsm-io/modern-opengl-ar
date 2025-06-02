@@ -23,7 +23,7 @@
 
 /* Light mode styles */
 .astro-code {
-  border: 1px solid var(--color-zinc-200);
+  border: 1px solid var(--color-neutral-200);
   border-radius: 0 !important;
   font-size: 13px;
   overflow-x: auto !important;
@@ -35,7 +35,7 @@
   margin-right: 1.5rem !important;
   display: inline-block !important;
   text-align: right !important;
-  color: var(--color-zinc-600) !important;
+  color: var(--color-neutral-600) !important;
   opacity: 0.5 !important;
 }
 
@@ -83,7 +83,7 @@
   height: 1em;
   margin-left: 0.5rem;
   transition: opacity 0.15s ease;
-  background-color: var(--color-zinc-400);
+  background-color: var(--color-neutral-400);
   -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke-width='1.5' stroke='currentColor'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' d='M13.19 8.688a4.5 4.5 0 011.242 7.244l-4.5 4.5a4.5 4.5 0 01-6.364-6.364l1.757-1.757m13.35-.622l1.757-1.757a4.5 4.5 0 00-6.364-6.364l-4.5 4.5a4.5 4.5 0 001.242 7.244' /%3E%3C/svg%3E");
   mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke-width='1.5' stroke='currentColor'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' d='M13.19 8.688a4.5 4.5 0 011.242 7.244l-4.5 4.5a4.5 4.5 0 01-6.364-6.364l1.757-1.757m13.35-.622l1.757-1.757a4.5 4.5 0 00-6.364-6.364l-4.5 4.5a4.5 4.5 0 001.242 7.244' /%3E%3C/svg%3E");
 }
@@ -105,17 +105,17 @@
   }
 
   .astro-code {
-    border: 1px solid var(--color-zinc-700);
+    border: 1px solid var(--color-neutral-700);
   }
 
   .astro-code code .line::before {
-    color: var(--color-zinc-400) !important;
+    color: var(--color-neutral-400) !important;
   }
 
   .prose h1 a::after,
   .prose h2 a::after,
   .prose h3 a::after,
   .prose h4 a::after {
-    background-color: var(--color-zinc-500);
+    background-color: var(--color-neutral-500);
   }
 }

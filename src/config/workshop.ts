@@ -72,17 +72,17 @@ export const WORKSHOP_CONFIG = {
       durationMin: 15
     },
     {
-      id: "step4-marker-tracking",
+      id: "step4-ar-marker",
       tag: "v4-ar-marker",
       title: "ArUco Marker + View/Proj",
       summary: "OpenCV detecta el marcador y convertimos rvec/tvec a vista GL.",
       durationMin: 20
     },
     {
-      id: "step5-camera-bg",
-      tag: "v5-camera-bg",
-      title: "Video de fondo",
-      summary: "Textura en tiempo real sobre un quad usando la imagen de la webcam.",
+      id: "step5-solar-system",
+      tag: "v5-solar-system",
+      title: "Sistema Solar 3D",
+      summary: "Agregamos Sol, Tierra y Luna con órbitas jerárquicas que flotan sobre el marcador ArUco detectado.",
       durationMin: 10
     },
     {
