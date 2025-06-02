@@ -27,7 +27,7 @@ export const WORKSHOP_CONFIG = {
 
   // ——————————————————— Repositorio base ———————————————————
   repository: {
-    url: "https://github.com/unmsm-io/modern-opengl-ar",
+    url: "https://github.com/unmsm-io/solar-system-ar",
     defaultBranch: "main",
     license: "MIT"
   },
@@ -113,7 +113,7 @@ export const WORKSHOP_CONFIG = {
     { label: "Inicio", href: "/" },
     { label: "Pasos",  href: "/steps" },
     { label: "Requisitos", href: "/setup" },
-    { label: "Repo",  href: "https://github.com/railly/modern-opengl-ar-workshop" }
+    { label: "Repo",  href: "https://github.com/Railly/solar-system-ar" }
   ],
 
   // ——————————————————— Recursos para descargar ———————————————————
