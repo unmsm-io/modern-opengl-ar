@@ -27,7 +27,7 @@ export const WORKSHOP_CONFIG = {
 
   // ——————————————————— Repositorio base ———————————————————
   repository: {
-    url: "https://github.com/unmsm-io/solar-system-ar",
+    url: "https://github.com/Railly/solar-system-ar",
     defaultBranch: "main",
     license: "MIT"
   },

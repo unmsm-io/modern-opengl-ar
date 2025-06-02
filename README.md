@@ -294,13 +294,6 @@ Los archivos estáticos se generan en `dist/`
 - **GitHub Pages:** Actions workflow
 - **Servidor propio:** Servir archivos estáticos
 
-### Variables de Entorno
-
-```bash
-# .env
-PUBLIC_SITE_URL=https://tu-dominio.com
-PUBLIC_REPO_URL=https://github.com/unmsm-io/modern-opengl-ar
-```
 
 ## 🤝 Contributing
 
@@ -331,7 +324,7 @@ pnpm build && pnpm preview
 ## 📚 Recursos Adicionales
 
 ### Workshop Code Repository
-- **Main Repo:** [unmsm-io/modern-opengl-ar](https://github.com/unmsm-io/modern-opengl-ar)
+- **Main Repo:** [Railly/solar-system-ar](https://github.com/Railly/solar-system-ar)
 - **Tags:** Cada paso tiene su tag correspondiente (`v0-setup`, `v1-opengl-window`, etc.)
 
 ### Documentación
@@ -363,6 +356,6 @@ MIT License - Ver [LICENSE](LICENSE) para más detalles.
 
 **🎯 ¿Listo para crear tu primera app de Realidad Aumentada con OpenGL?**
 
-[🚀 Comenzar Workshop](https://tu-sitio.com/steps) • [📖 Ver Documentación](https://tu-sitio.com) • [💻 Código Fuente](https://github.com/unmsm-io/modern-opengl-ar)
+[🚀 Comenzar Workshop](https://modern-opengl-ar.vercel.app/steps) • [📖 Ver Documentación](https://modern-opengl-ar.vercel.app) • [💻 Código Fuente](https://github.com/Railly/solar-system-ar)
 
 </div>
