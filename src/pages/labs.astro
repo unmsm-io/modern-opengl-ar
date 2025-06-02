@@ -17,7 +17,7 @@ const allLabs = WORKSHOP_CONFIG.steps.map((step, index) => ({
 <BaseLayout title="Pasos del Taller">
   <div class="prose dark:prose-invert max-w-none">
     <h1 class="text-2xl font-semibold mb-6">Pasos del Taller</h1>
-    <p class="text-neutral-600 dark:text-neutral-400 mb-8">
+    <p class="text-zinc-600 dark:text-zinc-400 mb-8">
       Sigue estos pasos incrementales para construir una aplicación de realidad
       aumentada con OpenGL.
     </p>
@@ -28,7 +28,7 @@ const allLabs = WORKSHOP_CONFIG.steps.map((step, index) => ({
           <h2 class="text-lg font-medium mt-0 mb-0">
             {WORKSHOP_CONFIG.title}
           </h2>
-          <span class="text-sm text-neutral-500">
+          <span class="text-sm text-zinc-500">
             {WORKSHOP_CONFIG.durationHours}h total
           </span>
         </div>
@@ -36,19 +36,19 @@ const allLabs = WORKSHOP_CONFIG.steps.map((step, index) => ({
         <div class="grid gap-4 md:grid-cols-2">
           {
             WORKSHOP_CONFIG.steps.map((step) => (
-              <article class="bg-white dark:bg-neutral-800/50 border border-neutral-200 dark:border-neutral-700 rounded p-4">
+              <article class="bg-white dark:bg-zinc-800/50 border border-zinc-200 dark:border-zinc-700 rounded p-4">
                 <div class="flex items-baseline justify-between mb-3">
                   <h3 class="text-base font-medium mt-0 mb-0">{step.title}</h3>
-                  <span class="text-xs text-neutral-500">
+                  <span class="text-xs text-zinc-500">
                     {step.durationMin} min
                   </span>
                 </div>
 
-                <p class="text-sm text-neutral-600 dark:text-neutral-300 mb-3">
+                <p class="text-sm text-zinc-600 dark:text-zinc-300 mb-3">
                   {step.summary}
                 </p>
 
-                <div class="flex items-center justify-between pt-3 border-t border-neutral-200 dark:border-neutral-700">
+                <div class="flex items-center justify-between pt-3 border-t border-zinc-200 dark:border-zinc-700">
                   <a
                     href={`/steps/${step.id}`}
                     class="text-sm text-blue-600 hover:text-blue-500 dark:text-blue-400 dark:hover:text-blue-300 no-underline hover:underline flex items-center gap-1"
@@ -60,7 +60,7 @@ const allLabs = WORKSHOP_CONFIG.steps.map((step, index) => ({
                     href={`${WORKSHOP_CONFIG.repository.url}/tree/${step.tag}`}
                     target="_blank"
                     rel="noopener noreferrer"
-                    class="text-sm text-neutral-600 hover:text-neutral-500 dark:text-neutral-400 dark:hover:text-neutral-300 no-underline hover:underline flex items-center gap-1"
+                    class="text-sm text-zinc-600 hover:text-zinc-500 dark:text-zinc-400 dark:hover:text-zinc-300 no-underline hover:underline flex items-center gap-1"
                   >
                     Código ({step.tag})
                     <ExternalLink class="w-3.5 h-3.5" />

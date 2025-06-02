@@ -36,8 +36,8 @@ const speaker = WORKSHOP_CONFIG.speaker;
       <div class="grid gap-4 md:grid-cols-2">
         {
           workshopBasics.map((item) => (
-            <div class="bg-white dark:bg-neutral-800/50 border border-neutral-200 dark:border-neutral-700 rounded p-4">
-              <dt class="text-sm text-neutral-500 dark:text-neutral-400 mt-0 font-medium">
+            <div class="bg-white dark:bg-zinc-800/50 border border-zinc-200 dark:border-zinc-700 rounded p-4">
+              <dt class="text-sm text-zinc-500 dark:text-zinc-400 mt-0 font-medium">
                 {item.label}
               </dt>
               <dd class="text-base mt-1 mb-0">{item.value}</dd>
@@ -51,7 +51,7 @@ const speaker = WORKSHOP_CONFIG.speaker;
     <section>
       <h2 class="text-lg font-medium mb-4">Ponente</h2>
       <div
-        class="bg-white dark:bg-neutral-800/50 border border-neutral-200 dark:border-neutral-700 rounded p-6"
+        class="bg-white dark:bg-zinc-800/50 border border-zinc-200 dark:border-zinc-700 rounded p-6"
       >
         <div class="flex items-start gap-4">
           <img
@@ -61,7 +61,7 @@ const speaker = WORKSHOP_CONFIG.speaker;
           />
           <div class="flex-1">
             <h3 class="text-base font-medium mt-0 mb-1">{speaker.name}</h3>
-            <p class="text-sm text-neutral-600 dark:text-neutral-300 mb-3">
+            <p class="text-sm text-zinc-600 dark:text-zinc-300 mb-3">
               {speaker.role}
             </p>
 
@@ -127,7 +127,7 @@ const speaker = WORKSHOP_CONFIG.speaker;
       <div class="grid gap-4">
         {
           WORKSHOP_CONFIG.prerequisites.map((prereq) => (
-            <div class="bg-white dark:bg-neutral-800/50 border border-neutral-200 dark:border-neutral-700 rounded p-4">
+            <div class="bg-white dark:bg-zinc-800/50 border border-zinc-200 dark:border-zinc-700 rounded p-4">
               <p class="font-medium mt-0 mb-0 text-sm">{prereq}</p>
             </div>
           ))
@@ -141,14 +141,14 @@ const speaker = WORKSHOP_CONFIG.speaker;
       <div class="space-y-3">
         {
           WORKSHOP_CONFIG.steps.map((step) => (
-            <div class="bg-white dark:bg-neutral-800/50 border border-neutral-200 dark:border-neutral-700 rounded p-4">
+            <div class="bg-white dark:bg-zinc-800/50 border border-zinc-200 dark:border-zinc-700 rounded p-4">
               <div class="flex items-center justify-between mb-2">
                 <h3 class="font-medium mt-0 mb-0 text-sm">{step.title}</h3>
-                <span class="text-xs text-neutral-500 bg-neutral-100 dark:bg-neutral-700 px-2 py-1 rounded">
+                <span class="text-xs text-zinc-500 bg-zinc-100 dark:bg-zinc-700 px-2 py-1 rounded">
                   {step.durationMin} min
                 </span>
               </div>
-              <p class="text-sm text-neutral-600 dark:text-neutral-300 m-0">
+              <p class="text-sm text-zinc-600 dark:text-zinc-300 m-0">
                 {step.summary}
               </p>
             </div>

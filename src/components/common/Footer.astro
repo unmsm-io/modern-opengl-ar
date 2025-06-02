@@ -33,24 +33,24 @@ const footerSections = [
 ---
 
 <footer
-  class="bg-white dark:bg-neutral-800 border-t border-neutral-200 dark:border-neutral-700"
+  class="bg-white dark:bg-zinc-800 border-t border-zinc-200 dark:border-zinc-700"
 >
   <div class="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
     <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
       <div>
         <h3
-          class="text-sm font-semibold text-neutral-600 dark:text-neutral-400 uppercase tracking-wider"
+          class="text-sm font-semibold text-zinc-600 dark:text-zinc-400 uppercase tracking-wider"
         >
           Información del Taller
         </h3>
         <ul class="mt-4 space-y-4">
-          <li class="text-base text-neutral-500 dark:text-neutral-400">
+          <li class="text-base text-zinc-500 dark:text-zinc-400">
             {WORKSHOP_CONFIG.title}
           </li>
-          <li class="text-base text-neutral-500 dark:text-neutral-400">
+          <li class="text-base text-zinc-500 dark:text-zinc-400">
             {WORKSHOP_CONFIG.place}
           </li>
-          <li class="text-base text-neutral-500 dark:text-neutral-400">
+          <li class="text-base text-zinc-500 dark:text-zinc-400">
             {
               new Date(WORKSHOP_CONFIG.date).toLocaleDateString("es-PE", {
                 year: "numeric",
@@ -65,7 +65,7 @@ const footerSections = [
       {
         footerSections.map((section) => (
           <div>
-            <h3 class="text-sm font-semibold text-neutral-600 dark:text-neutral-400 uppercase tracking-wider">
+            <h3 class="text-sm font-semibold text-zinc-600 dark:text-zinc-400 uppercase tracking-wider">
               {section.title}
             </h3>
             <ul class="mt-4 space-y-4">
@@ -76,7 +76,7 @@ const footerSections = [
                   <li>
                     <a
                       href={link.href}
-                      class="flex items-center text-base text-neutral-500 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-white"
+                      class="flex items-center text-base text-zinc-500 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white"
                       {...(linkData.external && {
                         target: "_blank",
                         rel: "noopener noreferrer",
@@ -97,8 +97,8 @@ const footerSections = [
       }
     </div>
 
-    <div class="mt-8 border-t border-neutral-200 dark:border-neutral-700 pt-8">
-      <p class="text-base text-neutral-400 dark:text-neutral-500 text-center">
+    <div class="mt-8 border-t border-zinc-200 dark:border-zinc-700 pt-8">
+      <p class="text-base text-zinc-400 dark:text-zinc-500 text-center">
         &copy; {currentYear} FISI - UNMSM. Todos los derechos reservados.
       </p>
     </div>
