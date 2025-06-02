@@ -1,65 +1,120 @@
 ---
-import BaseLayout from '../layouts/BaseLayout.astro';
-import WeeklySchedule from '../components/schedule/WeeklySchedule.astro';
-import ImportantDates from '../components/schedule/ImportantDates.astro';
-import { COURSE_CONFIG } from '../config/course';
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { WORKSHOP_CONFIG } from "../config/workshop";
+import { Clock, Calendar } from "lucide-astro";
 
-// Helper function to get week number relative to semester start
-function getWeekNumber(date: Date, semesterStart: Date): number {
-  const diffTime = date.getTime() - semesterStart.getTime();
-  const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
-  return Math.ceil(diffDays / 7);
-}
-
-// Get semester start date from the first important date
-const semesterStart = new Date(COURSE_CONFIG.importantDates[0].date);
-
-// Generate weekly schedule from modules
-const weeklySchedule = COURSE_CONFIG.modules.flatMap(module => {
-  const [startWeek, endWeek] = module.weeks.split('-').map(Number);
-  return Array.from(
-    { length: endWeek - startWeek + 1 },
-    (_, i) => ({
-      week: startWeek + i,
-      module: module.title,
-      topics: module.topics,
-      labs: module.labs.filter(lab => {
-        const labDate = new Date(lab.dueDate);
-        const labWeek = getWeekNumber(labDate, semesterStart);
-        return labWeek === startWeek + i;
-      })
-    })
-  );
-}).sort((a, b) => a.week - b.week);
-
-// Important dates combining lab deadlines and course milestones
-const importantDates = [
-  ...COURSE_CONFIG.modules.flatMap(module => 
-    module.labs.map(lab => ({
-      event: `Entrega: ${lab.title}`,
-      date: lab.dueDate,
-      type: 'lab' as const
-    }))
-  ),
-  ...COURSE_CONFIG.importantDates.map(date => ({
-    ...date,
-    type: 'milestone' as const
-  }))
-].sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime());
+// Calculate cumulative time for each step
+let cumulativeTime = 0;
+const stepsWithTiming = WORKSHOP_CONFIG.steps.map((step) => {
+  const startTime = cumulativeTime;
+  cumulativeTime += step.durationMin;
+  return {
+    ...step,
+    startTime,
+    endTime: cumulativeTime,
+  };
+});
 ---
 
-<BaseLayout title="Cronograma">
-  <div class="space-y-4 dark:bg-gray-900">
-    <h1 class="text-3xl font-bold text-gray-900 dark:text-white">
-      Cronograma
-    </h1>
+<BaseLayout title="Cronograma del Taller">
+  <div class="space-y-6 dark:bg-zinc-900">
+    <div
+      class="bg-white dark:bg-zinc-800 rounded-lg p-6 border border-zinc-200 dark:border-zinc-700"
+    >
+      <h1 class="text-3xl font-bold text-zinc-900 dark:text-white mb-4">
+        Cronograma del Taller
+      </h1>
 
-    <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
-      <div class="lg:col-span-2">
-        <WeeklySchedule schedule={weeklySchedule} />
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+        <div class="bg-zinc-50 dark:bg-zinc-700 rounded p-4">
+          <div class="flex items-center gap-2 mb-2">
+            <Calendar class="w-5 h-5 text-blue-600" />
+            <span class="font-medium">Fecha</span>
+          </div>
+          <p class="text-lg">
+            {
+              new Date(WORKSHOP_CONFIG.date).toLocaleDateString("es-PE", {
+                weekday: "long",
+                year: "numeric",
+                month: "long",
+                day: "numeric",
+              })
+            }
+          </p>
+        </div>
+
+        <div class="bg-zinc-50 dark:bg-zinc-700 rounded p-4">
+          <div class="flex items-center gap-2 mb-2">
+            <Clock class="w-5 h-5 text-green-600" />
+            <span class="font-medium">Duración Total</span>
+          </div>
+          <p class="text-lg">{WORKSHOP_CONFIG.durationHours} horas</p>
+        </div>
+
+        <div class="bg-zinc-50 dark:bg-zinc-700 rounded p-4">
+          <div class="flex items-center gap-2 mb-2">
+            <span class="font-medium">Lugar</span>
+          </div>
+          <p class="text-lg">{WORKSHOP_CONFIG.place}</p>
+        </div>
       </div>
-      <div>
-        <ImportantDates dates={importantDates} />
+    </div>
+
+    <div
+      class="bg-white dark:bg-zinc-800 rounded-lg p-6 border border-zinc-200 dark:border-zinc-700"
+    >
+      <h2 class="text-xl font-semibold text-zinc-900 dark:text-white mb-4">
+        Cronograma de Pasos
+      </h2>
+
+      <div class="space-y-4">
+        {
+          stepsWithTiming.map((step) => (
+            <div class="border border-zinc-200 dark:border-zinc-600 rounded-lg p-4">
+              <div class="flex items-start justify-between mb-2">
+                <h3 class="font-medium text-zinc-900 dark:text-white">
+                  {step.title}
+                </h3>
+                <div class="flex items-center gap-4 text-sm text-zinc-500 dark:text-zinc-400">
+                  <span>
+                    Min {step.startTime} - {step.endTime}
+                  </span>
+                  <span class="bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 px-2 py-1 rounded">
+                    {step.durationMin} min
+                  </span>
+                </div>
+              </div>
+              <p class="text-zinc-600 dark:text-zinc-300 mb-2">
+                {step.summary}
+              </p>
+              <div class="flex items-center gap-2 text-sm">
+                <span class="text-zinc-500 dark:text-zinc-400">Tag:</span>
+                <code class="bg-zinc-100 dark:bg-zinc-700 px-2 py-1 rounded text-xs">
+                  {step.tag}
+                </code>
+              </div>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+
+    <div
+      class="bg-white dark:bg-zinc-800 rounded-lg p-6 border border-zinc-200 dark:border-zinc-700"
+    >
+      <h2 class="text-xl font-semibold text-zinc-900 dark:text-white mb-4">
+        Recursos Necesarios
+      </h2>
+
+      <div class="grid gap-4">
+        {
+          WORKSHOP_CONFIG.prerequisites.map((prereq) => (
+            <div class="flex items-start gap-3 p-3 bg-zinc-50 dark:bg-zinc-700 rounded">
+              <div class="w-2 h-2 bg-blue-600 rounded-full mt-2" />
+              <span class="text-zinc-700 dark:text-zinc-300">{prereq}</span>
+            </div>
+          ))
+        }
       </div>
     </div>
   </div>

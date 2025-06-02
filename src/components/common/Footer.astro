@@ -1,90 +1,105 @@
 ---
-import { Github, Book, ExternalLink } from 'lucide-astro';
-import { COURSE_CONFIG } from '../../config/course';
+import { Github, Book, ExternalLink } from "lucide-astro";
+import { WORKSHOP_CONFIG } from "../../config/workshop";
 
 const currentYear = new Date().getFullYear();
 
 const footerSections = [
   {
-    title: 'Recursos',
+    title: "Recursos",
     links: [
-      { text: 'Sílabo', href: '/syllabus' },
-      { text: 'Cronograma', href: '/schedule' },
-      { text: 'Laboratorios', href: '/labs' },
-      { text: 'Proyecto', href: '/project' }
-    ]
+      { text: "Información", href: "/syllabus" },
+      { text: "Pasos", href: "/steps" },
+      { text: "Requisitos", href: "/setup" },
+    ],
   },
   {
-    title: 'Links',
+    title: "Links",
     links: [
-      { 
-        text: 'GitHub',
-        href: COURSE_CONFIG.repository.url,
+      {
+        text: "GitHub",
+        href: WORKSHOP_CONFIG.repository.url,
         icon: Github,
-        external: true
+        external: true,
       },
       {
-        text: 'Documentación',
-        href: '/docs',
-        icon: Book
-      }
-    ]
-  }
+        text: "Recursos",
+        href: "/resources",
+        icon: Book,
+      },
+    ],
+  },
 ];
 ---
 
-<footer class="bg-white dark:bg-gray-800 border-t border-gray-200 dark:border-gray-700">
+<footer
+  class="bg-white dark:bg-zinc-800 border-t border-zinc-200 dark:border-zinc-700"
+>
   <div class="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
     <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
       <div>
-        <h3 class="text-sm font-semibold text-gray-600 dark:text-gray-400 uppercase tracking-wider">
-          Información del Curso
+        <h3
+          class="text-sm font-semibold text-zinc-600 dark:text-zinc-400 uppercase tracking-wider"
+        >
+          Información del Taller
         </h3>
         <ul class="mt-4 space-y-4">
-          <li class="text-base text-gray-500 dark:text-gray-400">
-            {COURSE_CONFIG.code} - {COURSE_CONFIG.name}
+          <li class="text-base text-zinc-500 dark:text-zinc-400">
+            {WORKSHOP_CONFIG.title}
           </li>
-          <li class="text-base text-gray-500 dark:text-gray-400">
-            {COURSE_CONFIG.department}
+          <li class="text-base text-zinc-500 dark:text-zinc-400">
+            {WORKSHOP_CONFIG.place}
           </li>
-          <li class="text-base text-gray-500 dark:text-gray-400">
-            {COURSE_CONFIG.semester}
+          <li class="text-base text-zinc-500 dark:text-zinc-400">
+            {
+              new Date(WORKSHOP_CONFIG.date).toLocaleDateString("es-PE", {
+                year: "numeric",
+                month: "long",
+                day: "numeric",
+              })
+            }
           </li>
         </ul>
       </div>
 
-      {footerSections.map(section => (
-        <div>
-          <h3 class="text-sm font-semibold text-gray-600 dark:text-gray-400 uppercase tracking-wider">
-            {section.title}
-          </h3>
-          <ul class="mt-4 space-y-4">
-            {section.links.map(link => (
-              <li>
-                <a
-                  href={link.href}
-                  class="flex items-center text-base text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white"
-                  {...link.external && {
-                    target: '_blank',
-                    rel: 'noopener noreferrer'
-                  }}
-                >
-                  {link.icon && <link.icon class="w-5 h-5 mr-2" />}
-                  {link.text}
-                  {link.external && (
-                    <ExternalLink class="w-4 h-4 ml-1" />
-                  )}
-                </a>
-              </li>
-            ))}
-          </ul>
-        </div>
-      ))}
+      {
+        footerSections.map((section) => (
+          <div>
+            <h3 class="text-sm font-semibold text-zinc-600 dark:text-zinc-400 uppercase tracking-wider">
+              {section.title}
+            </h3>
+            <ul class="mt-4 space-y-4">
+              {section.links.map((link) => {
+                const linkData = link as any;
+                const IconComponent = linkData.icon;
+                return (
+                  <li>
+                    <a
+                      href={link.href}
+                      class="flex items-center text-base text-zinc-500 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white"
+                      {...(linkData.external && {
+                        target: "_blank",
+                        rel: "noopener noreferrer",
+                      })}
+                    >
+                      {IconComponent && <IconComponent class="w-5 h-5 mr-2" />}
+                      {link.text}
+                      {linkData.external && (
+                        <ExternalLink class="w-4 h-4 ml-1" />
+                      )}
+                    </a>
+                  </li>
+                );
+              })}
+            </ul>
+          </div>
+        ))
+      }
     </div>
 
-    <div class="mt-8 border-t border-gray-200 dark:border-gray-700 pt-8">
-      <p class="text-base text-gray-400 dark:text-gray-500 text-center">
-        &copy; {currentYear} {COURSE_CONFIG.university}. Todos los derechos reservados.
+    <div class="mt-8 border-t border-zinc-200 dark:border-zinc-700 pt-8">
+      <p class="text-base text-zinc-400 dark:text-zinc-500 text-center">
+        &copy; {currentYear} FISI - UNMSM. Todos los derechos reservados.
       </p>
     </div>
   </div>

@@ -1,0 +1,176 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { getCollection } from "astro:content";
+import { WORKSHOP_CONFIG } from "../config/workshop";
+import { ChevronRight, Clock, ExternalLink, GitBranch } from "lucide-astro";
+
+// Get all steps from the content collection
+const steps = await getCollection("step");
+
+// Sort steps by their order in WORKSHOP_CONFIG
+const sortedSteps = steps.sort((a, b) => {
+  const aIndex = WORKSHOP_CONFIG.steps.findIndex(
+    (step) => step.id === a.data.id,
+  );
+  const bIndex = WORKSHOP_CONFIG.steps.findIndex(
+    (step) => step.id === b.data.id,
+  );
+  return aIndex - bIndex;
+});
+---
+
+<BaseLayout title="Pasos del Taller">
+  <div class="prose dark:prose-invert max-w-none">
+    <h1 class="text-2xl font-semibold mb-6">Pasos del Taller</h1>
+    <p class="text-zinc-600 dark:text-zinc-400 mb-8">
+      Sigue estos pasos incrementales para construir una aplicación de realidad
+      aumentada con OpenGL. Cada paso incluye código fuente, explicaciones
+      detalladas y recursos adicionales.
+    </p>
+
+    <div class="space-y-6">
+      {
+        sortedSteps.map((step, index) => (
+          <article class="not-prose bg-white dark:bg-zinc-800/50 border border-zinc-200 dark:border-zinc-700 rounded-lg p-6">
+            <div class="flex items-start justify-between mb-4">
+              <div class="flex-1">
+                <div class="flex items-center gap-3 mb-2">
+                  <span class="inline-flex items-center justify-center w-8 h-8 bg-blue-600 text-white text-sm font-semibold rounded-full">
+                    {index + 1}
+                  </span>
+                  <h2 class="text-xl font-semibold text-zinc-900 dark:text-zinc-100 m-0">
+                    {step.data.title}
+                  </h2>
+                </div>
+
+                <p class="text-zinc-600 dark:text-zinc-300 mb-4">
+                  {step.data.summary}
+                </p>
+
+                <div class="flex flex-wrap items-center gap-4 text-sm text-zinc-500 dark:text-zinc-400 mb-4">
+                  <div class="flex items-center gap-1">
+                    <Clock class="w-4 h-4" />
+                    <span>{step.data.durationMin} min</span>
+                  </div>
+
+                  <div class="flex items-center gap-1">
+                    <GitBranch class="w-4 h-4" />
+                    <code class="bg-zinc-100 dark:bg-zinc-700 px-2 py-1 rounded text-xs">
+                      {step.data.tag}
+                    </code>
+                  </div>
+
+                  <div class="flex items-center gap-1">
+                    <img
+                      src={step.data.authorImageUrl}
+                      alt={step.data.author}
+                      class="w-4 h-4 rounded-full object-cover"
+                    />
+                    <span>{step.data.author}</span>
+                  </div>
+                </div>
+
+                {step.data.files && step.data.files.length > 0 && (
+                  <div class="mb-4">
+                    <h3 class="text-sm font-medium text-zinc-700 dark:text-zinc-300 mb-2">
+                      Archivos principales:
+                    </h3>
+                    <div class="flex flex-wrap gap-2">
+                      {step.data.files.slice(0, 3).map((file) => (
+                        <code class="bg-zinc-100 dark:bg-zinc-700 text-zinc-700 dark:text-zinc-300 px-2 py-1 rounded text-xs">
+                          {file}
+                        </code>
+                      ))}
+                      {step.data.files.length > 3 && (
+                        <span class="text-xs text-zinc-500 dark:text-zinc-400">
+                          +{step.data.files.length - 3} más
+                        </span>
+                      )}
+                    </div>
+                  </div>
+                )}
+              </div>
+            </div>
+
+            <div class="flex items-center justify-between pt-4 border-t border-zinc-200 dark:border-zinc-700">
+              <div class="flex items-center gap-3">
+                <a
+                  href={`/steps/${step.data.id}`}
+                  class="inline-flex items-center gap-2 bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition-colors text-sm font-medium"
+                >
+                  Ver paso completo
+                  <ChevronRight class="w-4 h-4" />
+                </a>
+
+                <a
+                  href={`${WORKSHOP_CONFIG.repository.url}/tree/${step.data.tag}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="inline-flex items-center gap-2 border border-zinc-300 dark:border-zinc-600 text-zinc-700 dark:text-zinc-300 px-4 py-2 rounded hover:bg-zinc-50 dark:hover:bg-zinc-800 transition-colors text-sm"
+                >
+                  <ExternalLink class="w-4 h-4" />
+                  Código fuente
+                </a>
+              </div>
+
+              <time class="text-xs text-zinc-500 dark:text-zinc-400">
+                {new Date(step.data.pubDate).toLocaleDateString("es-PE", {
+                  year: "numeric",
+                  month: "short",
+                  day: "numeric",
+                })}
+              </time>
+            </div>
+          </article>
+        ))
+      }
+    </div>
+
+    <!-- Workshop Summary -->
+    <div
+      class="not-prose mt-12 bg-gradient-to-r from-blue-50 to-indigo-50 dark:from-blue-900/20 dark:to-indigo-900/20 border border-blue-200 dark:border-blue-800 rounded-lg p-6"
+    >
+      <h2 class="text-lg font-semibold text-zinc-900 dark:text-zinc-100 mb-2">
+        Resumen del Taller
+      </h2>
+      <p class="text-zinc-600 dark:text-zinc-300 mb-4">
+        {WORKSHOP_CONFIG.subtitle}
+      </p>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-sm">
+        <div>
+          <span class="font-medium text-zinc-700 dark:text-zinc-300"
+            >Duración total:</span
+          >
+          <div class="text-zinc-600 dark:text-zinc-400">
+            {WORKSHOP_CONFIG.durationHours} horas
+          </div>
+        </div>
+
+        <div>
+          <span class="font-medium text-zinc-700 dark:text-zinc-300"
+            >Fecha:</span
+          >
+          <div class="text-zinc-600 dark:text-zinc-400">
+            {
+              new Date(WORKSHOP_CONFIG.date).toLocaleDateString("es-PE", {
+                year: "numeric",
+                month: "long",
+                day: "numeric",
+              })
+            }
+          </div>
+        </div>
+
+        <div>
+          <span class="font-medium text-zinc-700 dark:text-zinc-300"
+            >Ubicación:</span
+          >
+          <div class="text-zinc-600 dark:text-zinc-400">
+            {WORKSHOP_CONFIG.place}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</BaseLayout>

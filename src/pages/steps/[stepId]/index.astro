@@ -1,0 +1,29 @@
+---
+import type { GetStaticPaths } from "astro";
+import { getCollection, getEntry, render } from "astro:content";
+import StepLayout from "../../../layouts/StepLayout.astro";
+
+export const getStaticPaths: GetStaticPaths = async () => {
+  const steps = await getCollection("step");
+  return steps.map((entry) => ({
+    params: { stepId: entry.data.id },
+    props: { entry },
+  }));
+};
+
+interface Props {
+  entry: any; // The step content entry
+}
+
+const { entry } = Astro.props;
+
+if (!entry) {
+  return Astro.redirect("/404");
+}
+
+const { Content, headings } = await render(entry);
+---
+
+<StepLayout frontmatter={entry.data} id={entry.data.id} headings={headings}>
+  <Content />
+</StepLayout>

@@ -1,80 +1,134 @@
 ---
-import BaseLayout from '../layouts/BaseLayout.astro';
-import { COURSE_CONFIG } from '../config/course';
-import { Mail, Clock, ExternalLink, GraduationCap } from 'lucide-astro';
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { WORKSHOP_CONFIG } from "../config/workshop";
+import { Mail, Github, Linkedin, Twitter, ExternalLink } from "lucide-astro";
 
-const { instructors } = COURSE_CONFIG;
-const [mainInstructor, teachingAssistant] = instructors;
+const { speaker } = WORKSHOP_CONFIG;
 ---
 
-<BaseLayout title="Equipo">
+<BaseLayout title="Ponente">
   <div class="prose dark:prose-invert max-w-none">
-    <h1 class="text-2xl font-semibold mb-6">Equipo Docente</h1>
+    <h1 class="text-2xl font-semibold mb-6">Ponente del Taller</h1>
 
     <div class="space-y-8">
-      <!-- Main Instructor -->
+      <!-- Speaker Information -->
       <section>
-        <h2 class="text-lg font-medium mt-0 mb-4">Profesor</h2>
-        <div class="bg-white dark:bg-gray-800/50 border border-gray-200 dark:border-gray-700 rounded p-4">
-          <div class="flex gap-4">
+        <div
+          class="bg-white dark:bg-zinc-800/50 border border-zinc-200 dark:border-zinc-700 rounded-lg p-6"
+        >
+          <div class="flex flex-col md:flex-row gap-6">
             <img
-              src={mainInstructor.image}
-              alt={mainInstructor.name}
-              class="w-36 h-36 mt-0 mb-0 object-cover rounded"
+              src={speaker.avatar}
+              alt={speaker.name}
+              class="w-48 h-48 mt-0 mb-0 object-cover rounded-lg mx-auto md:mx-0"
               loading="lazy"
             />
-            <div>
-              <h3 class="text-base font-medium mt-0 mb-1">{mainInstructor.name}</h3>
-              <a
-                href={`mailto:${mainInstructor.email}`}
-                class="text-sm text-blue-600 dark:text-blue-400 hover:underline inline-flex items-center gap-1"
-              >
-                <Mail class="w-3.5 h-3.5" />
-                {mainInstructor.email}
-                <ExternalLink class="w-3.5 h-3.5" />
-              </a>
-              <div class="mt-2 flex items-center gap-2 text-sm text-gray-600 dark:text-gray-300">
-                <Clock class="w-3.5 h-3.5 text-gray-400" />
-                {mainInstructor.officeHours}
-              </div>
-              <div class="mt-1 text-sm text-gray-600 dark:text-gray-300">
-                <GraduationCap class="w-3.5 h-3.5 inline mr-1" />
-                {mainInstructor.education}
+            <div class="flex-1">
+              <h2 class="text-xl font-semibold mt-0 mb-2">
+                {speaker.name}
+              </h2>
+              <p class="text-zinc-600 dark:text-zinc-300 mb-4">
+                {speaker.role}
+              </p>
+
+              <div class="space-y-3">
+                <a
+                  href={`mailto:${speaker.contact}`}
+                  class="text-sm text-blue-600 dark:text-blue-400 hover:underline inline-flex items-center gap-2"
+                >
+                  <Mail class="w-4 h-4" />
+                  {speaker.contact}
+                </a>
+
+                <div class="flex flex-wrap gap-4">
+                  {
+                    speaker.social.github && (
+                      <a
+                        href={speaker.social.github}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        class="text-sm text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white inline-flex items-center gap-2"
+                      >
+                        <Github class="w-4 h-4" />
+                        GitHub
+                        <ExternalLink class="w-3 h-3" />
+                      </a>
+                    )
+                  }
+
+                  {
+                    speaker.social.linkedin && (
+                      <a
+                        href={speaker.social.linkedin}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        class="text-sm text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white inline-flex items-center gap-2"
+                      >
+                        <Linkedin class="w-4 h-4" />
+                        LinkedIn
+                        <ExternalLink class="w-3 h-3" />
+                      </a>
+                    )
+                  }
+
+                  {
+                    speaker.social.twitter && (
+                      <a
+                        href={speaker.social.twitter}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        class="text-sm text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white inline-flex items-center gap-2"
+                      >
+                        <Twitter class="w-4 h-4" />
+                        Twitter
+                        <ExternalLink class="w-3 h-3" />
+                      </a>
+                    )
+                  }
+                </div>
               </div>
             </div>
           </div>
         </div>
       </section>
 
-      <!-- Teaching Assistant -->
+      <!-- Workshop Information -->
       <section>
-        <h2 class="text-lg font-medium mt-0 mb-4">Jefe de Práctica</h2>
-        <div class="bg-white dark:bg-gray-800/50 border border-gray-200 dark:border-gray-700 rounded p-4">
-          <div class="flex gap-4">
-            <img
-              src={teachingAssistant.image}
-              alt={teachingAssistant.name}
-              class="w-32 h-32 mt-0 mb-0 object-cover rounded"
-              loading="lazy"
-            />
+        <h2 class="text-lg font-medium mt-0 mb-4">Información del Taller</h2>
+        <div
+          class="bg-white dark:bg-zinc-800/50 border border-zinc-200 dark:border-zinc-700 rounded-lg p-4"
+        >
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
-              <h3 class="text-base font-medium mt-0 mb-1">{teachingAssistant.name}</h3>
-              <a
-                href={`mailto:${teachingAssistant.email}`}
-                class="text-sm text-blue-600 dark:text-blue-400 hover:underline inline-flex items-center gap-1"
-              >
-                <Mail class="w-3.5 h-3.5" />
-                {teachingAssistant.email}
-                <ExternalLink class="w-3.5 h-3.5" />
-              </a>
-              <div class="mt-2 flex items-center gap-2 text-sm text-gray-600 dark:text-gray-300">
-                <Clock class="w-3.5 h-3.5 text-gray-400" />
-                {teachingAssistant.officeHours}
-              </div>
-              <div class="mt-1 text-sm text-gray-600 dark:text-gray-300">
-                <GraduationCap class="w-3.5 h-3.5 inline mr-1" />
-                {teachingAssistant.education}
-              </div>
+              <h3 class="font-medium mb-2">Título</h3>
+              <p class="text-zinc-600 dark:text-zinc-300">
+                {WORKSHOP_CONFIG.title}
+              </p>
+            </div>
+            <div>
+              <h3 class="font-medium mb-2">Fecha</h3>
+              <p class="text-zinc-600 dark:text-zinc-300">
+                {
+                  new Date(WORKSHOP_CONFIG.date).toLocaleDateString("es-PE", {
+                    weekday: "long",
+                    year: "numeric",
+                    month: "long",
+                    day: "numeric",
+                  })
+                }
+              </p>
+            </div>
+            <div>
+              <h3 class="font-medium mb-2">Duración</h3>
+              <p class="text-zinc-600 dark:text-zinc-300">
+                {WORKSHOP_CONFIG.durationHours} horas
+              </p>
+            </div>
+            <div>
+              <h3 class="font-medium mb-2">Lugar</h3>
+              <p class="text-zinc-600 dark:text-zinc-300">
+                {WORKSHOP_CONFIG.place}
+              </p>
             </div>
           </div>
         </div>

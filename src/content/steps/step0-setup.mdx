@@ -1,0 +1,71 @@
+---
+id: "step0-setup"
+tag: "v0-setup"
+title: "Bootstrap & Build"
+summary: "Clonamos el repo, instalamos Homebrew + GLFW + Glad y comprobamos una ventana OpenGL vacía."
+durationMin: 10
+author: "Railly Hugo"
+authorImageUrl: "/hugo-profile.webp"
+pubDate: "2025-06-04"
+files: []
+path: "workshop/step0-setup"
+---
+
+import Alert     from "../../components/Alert.astro";
+import StepGuide from "../../components/StepGuide.astro";
+import CodeBlock from "../../components/CodeBlock.astro";
+
+<Alert type="info">
+  **Tag del repo:** <code>v0-setup</code> → <code>git checkout v0-setup</code>.
+</Alert>
+---
+
+## Clonar el proyecto
+
+```bash
+git clone https://github.com/FISI-SM/locked-in-cg.git
+cd locked-in-cg
+```
+
+## Instalar Homebrew y paquetes
+
+```bash
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+brew install glfw glm opencv pkg-config
+```
+
+*Glad ya viene vendorizado en `external/glad`, no uses brew.*
+
+## Tarea VS Code (⌘⇧B)
+
+`tasks.json` ya contiene la tarea **🔥 Build + Run AR Solar** que:
+
+* compila **src/\*.cpp**, glad y Dear ImGui  
+* enlaza OpenGL 4.1, GLFW y OpenCV 4.11  
+* genera **./solar** y lo inicia
+
+Presiona **⌘⇧B** y deberías ver una ventana gris oscuro:
+
+```cpp
+glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR,4);
+glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR,1);
+glfwWindowHint(GLFW_OPENGL_PROFILE,GLFW_OPENGL_CORE_PROFILE);
+glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT,GL_TRUE);   // macOS
+...
+glfwSwapInterval(1);                                  // V-Sync
+glClearColor(0.12f,0.12f,0.15f,1.0f);
+```
+
+## Checklist de validación
+
+| Ítem | OK |
+|------|----|
+| Compila sin warnings | ✅ |
+| Ejecutable `solar` se abre | ✅ |
+| Fondo gris (no crash) | ✅ |
+| Se cierra con <kbd>ESC</kbd> | ✅ |
+
+<Alert type="success">
+  ¡Listo! Pasamos a **Step 2 · Ventana & Contexto**  
+  <code>git checkout step1-window</code>
+</Alert>

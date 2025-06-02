@@ -1,50 +1,94 @@
 ---
-import { COURSE_CONFIG } from '../../config/course';
-import { Calendar, BookOpen } from 'lucide-astro';
+import { WORKSHOP_CONFIG } from "../../config/workshop";
+import { Calendar, BookOpen, Clock } from "lucide-astro";
 
-const allDeadlines = [
-  ...COURSE_CONFIG.modules
-    .flatMap(module => module.labs)
-    .map(lab => ({
-      type: 'lab' as const,
-      title: lab.title,
-      date: lab.dueDate,
-    })),
-  ...COURSE_CONFIG.importantDates
-    .map(date => ({
-      type: 'event' as const,
-      title: date.event,
-      date: date.date,
-    }))
-]
-.sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime())
-.slice(0, 3);
+// Create workshop timeline items
+const workshopItems = [
+  {
+    type: "workshop" as const,
+    title: WORKSHOP_CONFIG.title,
+    date: WORKSHOP_CONFIG.date,
+    description: `${WORKSHOP_CONFIG.durationHours} horas de taller práctico`,
+  },
+  ...WORKSHOP_CONFIG.resources.map((resource) => ({
+    type: "resource" as const,
+    title: resource.title,
+    date: WORKSHOP_CONFIG.date, // Use workshop date as reference
+    description: "Recurso disponible",
+  })),
+].slice(0, 3);
 ---
 
 <section class="prose dark:prose-invert max-w-none">
   <div class="p-6">
-    <h2 class="text-xl mt-0 font-semibold mb-4">Próximas Fechas</h2>
+    <h2 class="text-xl mt-0 font-semibold mb-4">Información Importante</h2>
     <div class="space-y-4">
-      {allDeadlines.map(deadline => (
-        <div class="flex gap-3">
-        <div class="w-8 h-8 rounded-full bg-gray-200/70 dark:bg-gray-100/20 flex items-center justify-center">
-            {deadline.type === 'lab' ? 
-              <BookOpen class="w-4 h-4 text-gray-600 dark:text-gray-400" /> : 
-              <Calendar class="w-4 h-4 text-gray-600 dark:text-gray-400" />
-            }
-          </div>
-          <div>
-            <p class="font-medium text-sm mt-0 mb-1">{deadline.title}</p>
-            <time class="text-sm text-gray-500" datetime={deadline.date}>
-              {new Date(deadline.date).toLocaleDateString('es-PE', {
-                year: 'numeric',
-                month: 'long',
-                day: 'numeric'
-              })}
-            </time>
-          </div>
+      <div class="flex gap-3">
+        <div
+          class="w-8 h-8 rounded-full bg-blue-200/70 dark:bg-blue-100/20 flex items-center justify-center"
+        >
+          <Calendar class="w-4 h-4 text-blue-600 dark:text-blue-400" />
         </div>
-      ))}
+        <div>
+          <p class="font-medium text-sm mt-0 mb-1">Fecha del Taller</p>
+          <time class="text-sm text-zinc-500" datetime={WORKSHOP_CONFIG.date}>
+            {
+              new Date(WORKSHOP_CONFIG.date).toLocaleDateString("es-PE", {
+                weekday: "long",
+                year: "numeric",
+                month: "long",
+                day: "numeric",
+              })
+            }
+          </time>
+        </div>
+      </div>
+
+      <div class="flex gap-3">
+        <div
+          class="w-8 h-8 rounded-full bg-green-200/70 dark:bg-green-100/20 flex items-center justify-center"
+        >
+          <Clock class="w-4 h-4 text-green-600 dark:text-green-400" />
+        </div>
+        <div>
+          <p class="font-medium text-sm mt-0 mb-1">Duración</p>
+          <span class="text-sm text-zinc-500">
+            {WORKSHOP_CONFIG.durationHours} horas
+          </span>
+        </div>
+      </div>
+
+      <div class="flex gap-3">
+        <div
+          class="w-8 h-8 rounded-full bg-purple-200/70 dark:bg-purple-100/20 flex items-center justify-center"
+        >
+          <BookOpen class="w-4 h-4 text-purple-600 dark:text-purple-400" />
+        </div>
+        <div>
+          <p class="font-medium text-sm mt-0 mb-1">Lugar</p>
+          <span class="text-sm text-zinc-500">
+            {WORKSHOP_CONFIG.place}
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <div class="mt-6 pt-4 border-t border-zinc-200 dark:border-zinc-700">
+      <h3 class="text-lg font-semibold mb-3">Recursos Disponibles</h3>
+      <div class="space-y-2">
+        {
+          WORKSHOP_CONFIG.resources.map((resource) => (
+            <a
+              href={resource.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="block text-sm text-blue-600 dark:text-blue-400 hover:underline"
+            >
+              {resource.title}
+            </a>
+          ))
+        }
+      </div>
     </div>
   </div>
 </section>

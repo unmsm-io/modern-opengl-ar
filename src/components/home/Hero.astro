@@ -1,27 +1,43 @@
 ---
-import { COURSE_CONFIG } from '../../config/course';
+import { WORKSHOP_CONFIG } from "../../config/workshop";
 ---
 
-<header class="text-black dark:text-white bg-gray-50 dark:bg-gray-900 border-b border-gray-200 dark:border-gray-800">
+<header
+  class="text-black dark:text-white bg-zinc-50 dark:bg-zinc-900 border-b border-zinc-200 dark:border-zinc-800"
+>
   <div class="max-w-6xl mx-auto px-4 py-3">
     <div class="flex flex-col gap-2">
       <div class="flex items-baseline gap-2">
-        <h1 class="text-2xl font-bold">{COURSE_CONFIG.code}:</h1>
-        <h2 class="text-2xl">{COURSE_CONFIG.name}</h2>
+        <h1 class="text-2xl font-bold">{WORKSHOP_CONFIG.title}</h1>
       </div>
-      
+      <p class="text-lg text-zinc-600 dark:text-zinc-300">
+        {WORKSHOP_CONFIG.subtitle}
+      </p>
+
       <div class="flex flex-wrap gap-x-8 gap-y-1 text-sm">
         <div class="flex items-center gap-1">
-          <span class="font-medium">Créditos:</span>
-          <span class="text-gray-600 dark:text-gray-300">{COURSE_CONFIG.credits}</span>
+          <span class="font-medium">Fecha:</span>
+          <span class="text-zinc-600 dark:text-zinc-300">
+            {
+              new Date(WORKSHOP_CONFIG.date).toLocaleDateString("es-PE", {
+                year: "numeric",
+                month: "long",
+                day: "numeric",
+              })
+            }
+          </span>
         </div>
         <div class="flex items-center gap-1">
-          <span class="font-medium">Horario:</span>
-          <span class="text-gray-600 dark:text-gray-300">{COURSE_CONFIG.schedule.lectures}</span>
+          <span class="font-medium">Duración:</span>
+          <span class="text-zinc-600 dark:text-zinc-300">
+            {WORKSHOP_CONFIG.durationHours} horas
+          </span>
         </div>
         <div class="flex items-center gap-1">
           <span class="font-medium">Lugar:</span>
-          <span class="text-gray-600 dark:text-gray-300">{COURSE_CONFIG.schedule.location}</span>
+          <span class="text-zinc-600 dark:text-zinc-300">
+            {WORKSHOP_CONFIG.place}
+          </span>
         </div>
       </div>
     </div>
