@@ -9,35 +9,187 @@ import "../styles/global.css";
 export interface Props {
   title: string;
   description?: string;
+  image?: string;
+  type?: "website" | "article";
+  publishedTime?: string;
+  modifiedTime?: string;
+  author?: string;
+  keywords?: string[];
+  canonical?: string;
 }
 
 const {
   title,
   description = "Taller de OpenGL moderno y Realidad Aumentada - UNMSM",
+  image = "/og.webp",
+  type = "website",
+  publishedTime,
+  modifiedTime,
+  author = WORKSHOP_CONFIG.speaker.name,
+  keywords = [
+    "OpenGL",
+    "Realidad Aumentada",
+    "C++",
+    "Workshop",
+    "UNMSM",
+    "AR",
+    "Computer Graphics",
+    "OpenCV",
+    "ArUco",
+  ],
+  canonical,
 } = Astro.props;
+
+// Generate absolute URLs
+const siteUrl = "https://modern-opengl-ar.vercel.app";
+const currentUrl = canonical || `${siteUrl}${Astro.url.pathname}`;
+const imageUrl = image.startsWith("http") ? image : `${siteUrl}${image}`;
+
+// Structured data for the workshop
+const structuredData = {
+  "@context": "https://schema.org",
+  "@type": "Course",
+  name: WORKSHOP_CONFIG.title,
+  description: WORKSHOP_CONFIG.subtitle,
+  provider: {
+    "@type": "Organization",
+    name: "FISI - Universidad Nacional Mayor de San Marcos",
+    url: "https://sistemas.unmsm.edu.pe/",
+  },
+  instructor: {
+    "@type": "Person",
+    name: WORKSHOP_CONFIG.speaker.name,
+    jobTitle: WORKSHOP_CONFIG.speaker.role,
+    url: WORKSHOP_CONFIG.speaker.social.github,
+    sameAs: [
+      WORKSHOP_CONFIG.speaker.social.github,
+      WORKSHOP_CONFIG.speaker.social.linkedin,
+      WORKSHOP_CONFIG.speaker.social.twitter,
+    ],
+  },
+  startDate: WORKSHOP_CONFIG.date,
+  duration: `PT${WORKSHOP_CONFIG.durationHours}H`,
+  location: {
+    "@type": "Place",
+    name: WORKSHOP_CONFIG.place,
+  },
+  courseMode: "in-person",
+  educationalLevel: "intermediate",
+  programmingLanguage: "C++",
+  teaches: [
+    "OpenGL programming",
+    "Augmented Reality development",
+    "Computer Graphics",
+    "3D mathematics",
+    "Shader programming",
+  ],
+};
 ---
 
 <!doctype html>
 <html lang="es">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content={description} />
+    <meta name="keywords" content={keywords.join(", ")} />
+    <meta name="author" content={author} />
+    <meta
+      name="robots"
+      content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1"
+    />
+    <meta name="googlebot" content="index, follow" />
+    <meta name="bingbot" content="index, follow" />
+
+    <!-- Canonical URL -->
+    <link rel="canonical" href={currentUrl} />
+
+    <!-- Favicon and icons -->
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+
+    <!-- Language and region -->
+    <meta name="language" content="es" />
+    <meta name="geo.region" content="PE-LMA" />
+    <meta name="geo.placename" content="Lima, Peru" />
+
+    <!-- Theme and appearance -->
+    <meta name="theme-color" content="#2563eb" />
+    <meta name="color-scheme" content="light dark" />
+
+    <!-- Generator -->
     <meta name="generator" content={Astro.generator} />
 
-    <!-- Open Graph -->
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content={type} />
+    <meta property="og:url" content={currentUrl} />
     <meta property="og:title" content={`${title} | ${WORKSHOP_CONFIG.title}`} />
-    <meta property="og:description" content={WORKSHOP_CONFIG.subtitle} />
-    <meta property="og:type" content="website" />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={imageUrl} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta
+      property="og:image:alt"
+      content={`${title} - ${WORKSHOP_CONFIG.subtitle}`}
+    />
+    <meta property="og:site_name" content={WORKSHOP_CONFIG.title} />
+    <meta property="og:locale" content="es_PE" />
+    {
+      publishedTime && (
+        <meta property="article:published_time" content={publishedTime} />
+      )
+    }
+    {
+      modifiedTime && (
+        <meta property="article:modified_time" content={modifiedTime} />
+      )
+    }
+    {author && <meta property="article:author" content={author} />}
 
-    <!-- Twitter -->
-    <meta name="twitter:card" content="summary" />
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:site" content="@raillyhugo" />
+    <meta name="twitter:creator" content="@raillyhugo" />
+    <meta name="twitter:url" content={currentUrl} />
     <meta
       name="twitter:title"
       content={`${title} | ${WORKSHOP_CONFIG.title}`}
     />
-    <meta name="twitter:description" content={WORKSHOP_CONFIG.subtitle} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={imageUrl} />
+    <meta
+      name="twitter:image:alt"
+      content={`${title} - ${WORKSHOP_CONFIG.subtitle}`}
+    />
+
+    <!-- LinkedIn -->
+    <meta property="og:image:secure_url" content={imageUrl} />
+    <meta property="og:image:type" content="image/webp" />
+
+    <!-- Additional SEO tags -->
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+    <meta name="apple-mobile-web-app-title" content={WORKSHOP_CONFIG.title} />
+
+    <!-- Preconnect to external domains -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="preconnect" href="https://github.com" />
+
+    <!-- DNS prefetch -->
+    <link rel="dns-prefetch" href="https://vercel.com" />
+    <link rel="dns-prefetch" href="https://cdnjs.cloudflare.com" />
+
+    <!-- Structured Data (JSON-LD) -->
+    <script
+      type="application/ld+json"
+      set:html={JSON.stringify(structuredData)}
+    />
 
     <title>{title} | {WORKSHOP_CONFIG.title}</title>
   </head>
@@ -50,7 +202,7 @@ const {
         class="flex-1 flex flex-col transition-all duration-300 ease-in-out lg:ml-64"
         id="main-content"
       >
-        <main class="flex-1 p-4 md:p-8">
+        <main class="flex-1 p-4 md:p-8" role="main">
           <slot />
         </main>
         <Footer />
@@ -69,6 +221,7 @@ const {
         fill="none"
         viewBox="0 0 24 24"
         stroke="currentColor"
+        aria-hidden="true"
       >
         <path
           stroke-linecap="round"
